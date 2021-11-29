@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
-import colors from '../../../utils/style/colors';
+import colors from '../../../utils/style/colors/baseColors';
 
 const Nav = styled.nav`
-  background: #000;
+  background: ${colors.tertiary};
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -21,38 +21,6 @@ const NavLink = styled.div`
   align-items: center;
   text-decoration: none;
   padding: 0 1rem;
-  > * {
-    ${(props) =>
-      props.activeStyle
-        ? `
-        &:hover {
-          color: #15cdfc;
-        }
-        &:active{
-            color: ${colors.primary};}
-    `
-        : ''}
-    ${(props) =>
-      props.focusStyle
-        ? `
-        border-radius: 4px;
-        background: #05a03f;
-        padding: 10px 22px;
-        color: #fff;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-        margin-left: 24px;
-        &:hover {
-          color: black;
-        }
-        &:active{
-            color: #fff;
-        }
-    `
-        : ''}
-  }
 `;
 
 const Bars = styled(FaBars)`

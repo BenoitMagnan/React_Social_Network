@@ -5,7 +5,9 @@ function Login() {
   return (
     <>
       <Header />
-      <h1>Please Login</h1>
+      <div className="content">
+        <h1>Please Login</h1>
+      </div>
     </>
   );
 }

@@ -5,7 +5,9 @@ function Prout() {
   return (
     <>
       <Header />
-      <h1>Prout</h1>
+      <div className="content">
+        <h1>Prout</h1>
+      </div>
     </>
   );
 }

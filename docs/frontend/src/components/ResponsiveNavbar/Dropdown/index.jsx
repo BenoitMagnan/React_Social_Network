@@ -5,7 +5,6 @@ import {
   Icon,
   DropdownWrapper,
   DropdownMenu,
-  DropdownButtonWrapper,
 } from './Dropdown';
 import { Home, About, Prout, Signup, Login } from '../Link';
 
@@ -23,9 +22,6 @@ function Dropdown({ isOpen, toggle }) {
           <Signup />
           <Login />
         </DropdownMenu>
-        <DropdownButtonWrapper>
-          <Login />
-        </DropdownButtonWrapper>
       </DropdownWrapper>
     </DropdownContainer>
   );

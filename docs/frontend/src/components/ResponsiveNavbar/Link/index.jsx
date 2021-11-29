@@ -1,44 +1,49 @@
 import React from 'react';
-import StyledLink from './Link';
+import { StyledNavLink } from './Link';
 import logo from '../../../assets/icon-left-font-monochrome-white.svg';
 
 function Home() {
   return (
-    <StyledLink to="/">
-      <img src={logo} style={{ width: '10em' }} alt="Groupomania" />
-    </StyledLink>
+    <StyledNavLink to="/" aria-label="Se rendre à la page d'accueil" logo focus>
+      <img src={logo} style={{ width: '10em' }} alt="Logo de Groupomania" />
+    </StyledNavLink>
   );
 }
 
 function About() {
   return (
-    <StyledLink to="/about" activeStyle>
+    <StyledNavLink to="/about" aria-label="Se rendre à la page About" focus>
       About
-    </StyledLink>
+    </StyledNavLink>
   );
 }
 
 function Prout() {
   return (
-    <StyledLink to="/prout" activeStyle>
+    <StyledNavLink to="/prout" aria-label="Se rendre à la page Prout" focus>
       Prout
-    </StyledLink>
+    </StyledNavLink>
   );
 }
 
 function Signup() {
   return (
-    <StyledLink to="/signup" activeStyle>
+    <StyledNavLink to="/signup" aria-label="Se rendre à la page Signup" focus>
       Sign up
-    </StyledLink>
+    </StyledNavLink>
   );
 }
 
 function Login() {
   return (
-    <StyledLink to="/login" focusStyle>
+    <StyledNavLink
+      to="/login"
+      aria-label="Se rendre à la page Login"
+      hightLightStyle
+      focus
+    >
       Login
-    </StyledLink>
+    </StyledNavLink>
   );
 }
 

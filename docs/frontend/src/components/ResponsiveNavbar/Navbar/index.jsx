@@ -10,16 +10,16 @@ function Navbar({ toggle }) {
         <Home />
         <Bars onClick={toggle} />
         <NavMenu>
-          <NavLink activeStyle>
+          <NavLink>
             <About />
           </NavLink>
-          <NavLink activeStyle>
+          <NavLink>
             <Prout />
           </NavLink>
-          <NavLink activeStyle>
+          <NavLink>
             <Signup />
           </NavLink>
-          <NavLink focusStyle>
+          <NavLink>
             <Login />
           </NavLink>
         </NavMenu>

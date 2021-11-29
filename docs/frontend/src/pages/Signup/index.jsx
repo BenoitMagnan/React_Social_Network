@@ -5,7 +5,9 @@ function Signup() {
   return (
     <>
       <Header />
-      <h1>Sign up here</h1>
+      <div className="content">
+        <h1>Sign up here</h1>
+      </div>
     </>
   );
 }
