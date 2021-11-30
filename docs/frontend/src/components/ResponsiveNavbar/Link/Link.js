@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import colors from '../../../utils/style/colors/baseColors';
+import {
+  mediumColors,
+  darkestColors,
+  lightestColors,
+  darkerColors,
+} from '../../../utils/style/colors/';
 
 const StyledNavLink = styled(Link)`
-  color: #fff;
+  color: ${lightestColors.grey};
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -13,7 +18,7 @@ const StyledNavLink = styled(Link)`
   border: 1px solid transparent;
   transition: 200ms ease-out;
   &:active {
-    color: ${colors.primary};
+    color: ${mediumColors.primary};
     transition: 0ms;
   }
   ${(props) =>
@@ -21,7 +26,7 @@ const StyledNavLink = styled(Link)`
       ? `
         &:hover {
             border-radius: 5px;
-            border: 1px solid white;
+            border: 1px solid ${lightestColors.grey};
         }
     `
       : ''}
@@ -35,7 +40,7 @@ const StyledNavLink = styled(Link)`
       &:focus {
           outline: none;
           border-radius: 5px;
-          border: 1px solid white;
+          border: 1px solid ${lightestColors.grey};
       }
       
       @media screen and (max-width: 768px) {
@@ -43,44 +48,51 @@ const StyledNavLink = styled(Link)`
         text-decoration: underline;
         border-radius: 0;
         border: none;
-        color: ${colors.tertiary};
+        color: ${mediumColors.grey};
       }
       &:focus {
         border-radius: 0;
       }
-    }
     `
       : ''}
       ${(props) =>
     props.hightLightStyle
       ? `
-        border-radius: 4px;
-        background: ${colors.primary};
+        border-radius: 5px;
+        background: ${mediumColors.primary};
         padding: 15px 30px;
-        color: ${colors.tertiary};
+        color: ${darkestColors.grey};
         cursor: pointer;
         text-decoration: none;
         margin-left: 24px;
         &:active{
-        color: black;
+        color: ${darkestColors.grey};
             border: 1px solid transparent;
         }
         &:focus {
           text-decoration: underline;
-          border: 1px solid ${colors.tertiary};
+          border: 1px solid ${darkestColors.grey};
         }
         @media screen and (max-width: 768px) {
           margin-left: 0;
           border-radius: 0;
-          background: white;
-          color:black;
+          background: ${lightestColors.grey};
+          color:${darkestColors.grey};
+          &:focus{
+            border: 1px solid ${darkerColors.secondary};
+          }
+          @media screen and (orientation: landscape){
+            margin: 5vh 20vw;
+            padding: 0;
+            border-radius: 5px;
+          }
         }
     `
       : ''}
 `;
 
 const StyledLink = styled(Link)`
-  color: ${colors.quadra};
+  color: ${mediumColors.secondary};
   &:hover {
     text-decoration: none;
   }
@@ -88,7 +100,7 @@ const StyledLink = styled(Link)`
     text-decoration: underline;
     outline: none;
     padding: 10px;
-    border: 1px solid #fff;
+    border: 1px solid ${lightestColors.grey};
     border-radius: 5px;
   }
 `;

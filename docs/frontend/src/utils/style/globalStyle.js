@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import colors from './colors/baseColors';
+import { mediumColors, darkerColors } from './colors/';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -10,12 +10,12 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background-color: ${colors.backgroundLight};
+    background-color: ${darkerColors.grey};
     line-height: 2.2em;
 }
 
 .content {
-    background: ${colors.tertiary};
+    background: ${mediumColors.grey};
     color: #fff;
     border-radius: 5px;
     width: 70vw;
@@ -28,16 +28,16 @@ h1, h2, h3, h4, h5, h6{
     color: #fff;
     margin: 20px 0px;
     font-weight: 700;
-    text-decoration: underline ${colors.primary} 2px;
+    text-decoration: underline ${mediumColors.primary} 2px;
     line-height: 1.8em;
 }
 
 strong {
-    color: ${colors.primary};
+    color: ${mediumColors.primary};
 }
 
 mark {
-    background: ${colors.primary};
+    background: ${mediumColors.primary};
     padding: 5px;
     border-radius: 5px;
 }

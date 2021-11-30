@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
-import colors from '../../../utils/style/colors/baseColors';
+import { darkerColors, lightestColors } from '../../../utils/style/colors/';
 
 const DropdownContainer = styled.aside`
   position: fixed;
   width: 100%;
   height: 100%;
-  background: ${colors.secondary};
+  background: ${darkerColors.secondary};
   border-radius: 25px;
   display: none;
   align-items: center;
@@ -23,7 +23,7 @@ const DropdownContainer = styled.aside`
 `;
 
 const CloseIcon = styled(FaTimes)`
-  color: #fff;
+  color: ${lightestColors.grey};
 `;
 
 const Icon = styled.div`
@@ -37,7 +37,7 @@ const Icon = styled.div`
 `;
 
 const DropdownWrapper = styled.div`
-  color: #fff;
+  color: ${lightestColors.grey};
 `;
 
 const DropdownMenu = styled.ul`

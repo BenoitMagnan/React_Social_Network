@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
-import colors from '../../../utils/style/colors/baseColors';
+import { darkestColors, lightestColors } from '../../../utils/style/colors/';
 
 const Nav = styled.nav`
-  background: ${colors.tertiary};
+  background: ${darkestColors.grey};
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -25,7 +25,7 @@ const NavLink = styled.div`
 
 const Bars = styled(FaBars)`
   display: none;
-  color: #fff;
+  color: ${lightestColors.grey};
   @media screen and (max-width: 768px) {
     display: block;
     position: absolute;
