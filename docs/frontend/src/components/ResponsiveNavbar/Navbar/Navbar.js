@@ -1,9 +1,21 @@
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
-import { darkestColors, lightestColors } from '../../../utils/style/colors/';
+import {
+  darkestColors,
+  darkerColors,
+  lighterColors,
+  lightestColors,
+  mediumColors,
+} from '../../../utils/style/colors/';
 
 const Nav = styled.nav`
-  background: ${darkestColors.grey};
+  border-bottom: 2px solid transparent;
+  background: ${({ theme }) =>
+    theme === 'light' ? `${darkestColors.grey}` : `${lightestColors.grey}`};
+  border-bottom: ${({ theme }) =>
+    theme === 'light'
+      ? `2px solid ${mediumColors.secondary}`
+      : `2px solid ${darkerColors.primary}`};
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -23,7 +35,8 @@ const NavLink = styled.div`
 
 const Bars = styled(FaBars)`
   display: none;
-  color: ${lightestColors.grey};
+  color: ${({ theme }) =>
+    theme === 'light' ? `${lightestColors.grey}` : `${darkestColors.grey}`};
   @media screen and (max-width: 768px) {
     display: block;
     position: absolute;

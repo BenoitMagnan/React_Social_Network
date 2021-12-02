@@ -16,8 +16,8 @@ const primaryTone = {
   saturation: '100%',
   lightness: '50%',
   darkestAdjust: -40,
-  darkerAdjust: -32,
-  mediumAdjust: -6,
+  darkerAdjust: -28,
+  mediumAdjust: -2,
   lighterAdjust: 16,
   lightestAdjust: 34,
 };

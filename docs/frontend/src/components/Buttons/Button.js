@@ -1,15 +1,37 @@
 import styled from 'styled-components';
-import colors from '../../utils/style/colors';
+import {
+  darkestColors,
+  lightestColors,
+  mediumColors,
+} from '../../utils/style/colors';
 
 const StyledButton = styled.button`
   display: flex;
-  padding: 10px;
+  padding: 1rem;
   border-radius: 100%;
   cursor: pointer;
-  transition: 200ms;
-  color: ${({ theme }) => (theme === 'light' ? 'white' : colors.tertiary)};
+  color: ${({ theme }) =>
+    theme === 'light' ? `${mediumColors.grey}` : `${lightestColors.grey}`};
   background-color: ${({ theme }) =>
-    theme === 'light' ? colors.tertiary : 'white'};
+    theme === 'light' ? `${lightestColors.grey}` : `${mediumColors.grey}`};
+  &:hover {
+    transition: 0;
+    outline-color: ${({ theme }) =>
+      theme === 'light'
+        ? `${mediumColors.secondary}`
+        : `${mediumColors.primary}`};
+    outline-style: solid;
+    outline-offset: 0.3em;
+  }
+  &:focus {
+    outline-color: ${({ theme }) =>
+      theme === 'light'
+        ? `${mediumColors.secondary}`
+        : `${mediumColors.primary}`};
+    outline-style: solid;
+    outline-offset: 0.3em;
+    outline-width: 0.28em;
+  }
 `;
 
 export { StyledButton };

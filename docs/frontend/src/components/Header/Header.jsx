@@ -12,7 +12,7 @@ function Header() {
   return (
     <>
       <Dropdown isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} />
+      <Navbar isOpen={isOpen} toggle={toggle} />
     </>
   );
 }

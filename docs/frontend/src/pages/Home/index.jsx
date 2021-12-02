@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import { StyledLink } from '../../components/ResponsiveNavbar/Link/Link';
+import { useTheme } from '../../utils/hooks';
+import { StyledLink } from '../../utils/style/globalStyle';
 
 function Home() {
+  const { theme } = useTheme();
   return (
     <>
       <Header />
@@ -20,7 +22,7 @@ function Home() {
           Lorem ipsum dolor sit <strong>amet consectetur</strong>, adipisicing
           elit. Minima aliquid aliquam sapiente debitis ratione neque aut
           repellendus vel vitae{' '}
-          <StyledLink to="/about" aria-label="Test de lien">
+          <StyledLink to="/about" aria-label="Test de lien" theme={theme}>
             bichtéré
           </StyledLink>{' '}
           facere exercitationem impedit earum, vero magni ex adipisci id sunt
