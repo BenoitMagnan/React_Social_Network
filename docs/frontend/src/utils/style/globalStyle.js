@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
-import { mediumColors, darkerColors } from './colors/';
+import {
+  mediumColors,
+  darkestColors,
+  darkerColors,
+  lighterColors,
+  lightestColors,
+} from './colors/';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -28,16 +34,16 @@ h1, h2, h3, h4, h5, h6{
     color: #fff;
     margin: 20px 0px;
     font-weight: 700;
-    text-decoration: underline ${mediumColors.primary} 2px;
+    text-decoration: underline ${mediumColors.secondary} 2px;
     line-height: 1.8em;
 }
 
 strong {
-    color: ${mediumColors.primary};
+    color: ${mediumColors.secondary};
 }
 
 mark {
-    background: ${mediumColors.primary};
+    background: ${lightestColors.primary};
     padding: 5px;
     border-radius: 5px;
 }

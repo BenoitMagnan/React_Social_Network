@@ -12,7 +12,7 @@ function Home() {
 
 function About() {
   return (
-    <StyledNavLink to="/about" aria-label="Se rendre à la page About" focus>
+    <StyledNavLink to="/about" aria-label="Se rendre à la page About">
       About
     </StyledNavLink>
   );
@@ -20,7 +20,7 @@ function About() {
 
 function Prout() {
   return (
-    <StyledNavLink to="/prout" aria-label="Se rendre à la page Prout" focus>
+    <StyledNavLink to="/prout" aria-label="Se rendre à la page Prout">
       Prout
     </StyledNavLink>
   );
@@ -28,7 +28,7 @@ function Prout() {
 
 function Signup() {
   return (
-    <StyledNavLink to="/signup" aria-label="Se rendre à la page Signup" focus>
+    <StyledNavLink to="/signup" aria-label="Se rendre à la page Signup">
       Sign up
     </StyledNavLink>
   );
@@ -40,7 +40,6 @@ function Login() {
       to="/login"
       aria-label="Se rendre à la page Login"
       hightLightStyle
-      focus
     >
       Login
     </StyledNavLink>

@@ -5,6 +5,7 @@ import {
   darkestColors,
   lightestColors,
   darkerColors,
+  lighterColors,
 } from '../../../utils/style/colors/';
 
 const StyledNavLink = styled(Link)`
@@ -18,8 +19,30 @@ const StyledNavLink = styled(Link)`
   border: 1px solid transparent;
   transition: 200ms ease-out;
   &:active {
-    color: ${mediumColors.primary};
+    color: ${mediumColors.secondary};
     transition: 0ms;
+  }
+  &:hover {
+    outline: none;
+    text-decoration: underline;
+  }
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+    border-radius: 5px;
+    border: 1px solid ${lightestColors.grey};
+  }
+
+  @media screen and (max-width: 768px) {
+    &:active {
+      text-decoration: underline;
+      border-radius: 0;
+      border: none;
+      color: ${mediumColors.grey};
+    }
+    &:focus {
+      border-radius: 0;
+    }
   }
   ${(props) =>
     props.logo
@@ -30,48 +53,24 @@ const StyledNavLink = styled(Link)`
         }
     `
       : ''}
+
   ${(props) =>
-    props.focus
-      ? `
-      &:hover{
-        outline: none;
-            text-decoration: underline;
-          }
-      &:focus {
-          outline: none;
-          border-radius: 5px;
-          border: 1px solid ${lightestColors.grey};
-      }
-      
-      @media screen and (max-width: 768px) {
-      &:active {
-        text-decoration: underline;
-        border-radius: 0;
-        border: none;
-        color: ${mediumColors.grey};
-      }
-      &:focus {
-        border-radius: 0;
-      }
-    `
-      : ''}
-      ${(props) =>
     props.hightLightStyle
       ? `
+        background: ${mediumColors.secondary};
         border-radius: 5px;
-        background: ${mediumColors.primary};
-        padding: 15px 30px;
+        padding: 5px 30px;
         color: ${darkestColors.grey};
         cursor: pointer;
         text-decoration: none;
         margin-left: 24px;
+        border: 2px solid transparent;
         &:active{
-        color: ${darkestColors.grey};
-            border: 1px solid transparent;
+            color: ${darkestColors.grey};
+            border: 2px solid ${darkerColors.grey};
         }
-        &:focus {
-          text-decoration: underline;
-          border: 1px solid ${darkestColors.grey};
+        &:focus{
+        border: 2px solid ${darkerColors.grey};  
         }
         @media screen and (max-width: 768px) {
           margin-left: 0;
