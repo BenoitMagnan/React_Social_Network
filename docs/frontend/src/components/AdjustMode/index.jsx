@@ -1,7 +1,7 @@
 import { AdjustModeContainer } from './adjustModeStyle';
 import { StyledButton } from '../Buttons/Button';
 import { useContext } from 'react';
-import { ThemeContext } from '../../utils/context/Context';
+import { ThemeContext } from '../../utils/context';
 import { FaAdjust } from 'react-icons/fa';
 
 function AdjustMode() {

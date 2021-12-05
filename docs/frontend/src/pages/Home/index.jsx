@@ -2,9 +2,11 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import { useTheme } from '../../utils/hooks';
 import { StyledLink } from '../../utils/style/globalStyle';
+import { TextAreaForm } from '../../components/Forms';
 
 function Home() {
   const { theme } = useTheme();
+
   return (
     <>
       <Header />
@@ -21,15 +23,18 @@ function Home() {
         <p>
           Lorem ipsum dolor sit <strong>amet consectetur</strong>, adipisicing
           elit. Minima aliquid aliquam sapiente debitis ratione neque aut
-          repellendus vel vitae{' '}
+          repellendus vel vitae
           <StyledLink to="/about" aria-label="Test de lien" theme={theme}>
             bichtéré
-          </StyledLink>{' '}
+          </StyledLink>
           facere exercitationem impedit earum, vero magni ex adipisci id sunt
           ut! Consequatur pariatur odit beatae? Pariatur quo, temporibus velit
           dicta ea dignissimos, vero beatae quas voluptatum cum mollitia magni
           assumenda placeat.
         </p>
+
+        <TextAreaForm />
+
         <h2>Lorem ipsum dolor sit amet consectetur !</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima

@@ -8,7 +8,7 @@ import Prout from './pages/Prout';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
-import { ThemeProvider } from './utils/context/Context';
+import { ThemeProvider } from './utils/context/';
 import GlobalStyle from './utils/style/globalStyle';
 import './utils/style/index.css';
 

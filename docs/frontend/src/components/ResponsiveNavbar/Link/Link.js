@@ -67,6 +67,7 @@ const StyledNavLink = styled(Link)`
     padding: 5px 30px;
     color: ${darkestColors.grey};
     margin-left: 24px;
+    text-transform: uppercase;
     border: 2px solid transparent;
     &:active {
       color: ${darkestColors.grey};

@@ -4,7 +4,9 @@ This command will install every package necessary to run the app
 
 - react-router-dom
 - styled-components
-- font-awesome packages
+- formik (handle form validation)
+- yup (used in formik to handle validationSchema)
+- react-icons
 
 ### `npm start`
 

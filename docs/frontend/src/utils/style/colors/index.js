@@ -1,3 +1,8 @@
+export const message = {
+  warning: '#800000',
+  warningBackground: '#FFD1D1',
+};
+
 const greyTone = {
   codeRGB: '#42424D',
   red: '26%',
@@ -30,8 +35,8 @@ const secondaryTone = {
   darkestAdjust: -43,
   darkerAdjust: -31,
   mediumAdjust: 0,
-  lighterAdjust: 0,
-  lightestAdjust: 0,
+  lighterAdjust: 16,
+  lightestAdjust: 34,
 };
 
 export const darkestColors = {
