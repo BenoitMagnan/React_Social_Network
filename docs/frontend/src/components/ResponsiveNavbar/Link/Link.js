@@ -5,7 +5,6 @@ import {
   darkestColors,
   lightestColors,
   darkerColors,
-  lighterColors,
 } from '../../../utils/style/colors/';
 
 const StyledNavLink = styled(Link)`
@@ -49,7 +48,7 @@ const StyledNavLink = styled(Link)`
     }
   }
   ${(props) =>
-    props.logo
+    props.$logo
       ? `
         &:hover {
             outline-style: solid;
@@ -66,11 +65,38 @@ const StyledNavLink = styled(Link)`
     border-radius: 5px;
     padding: 5px 30px;
     color: ${darkestColors.grey};
-    margin-left: 24px;
     text-transform: uppercase;
     border: 2px solid transparent;
     &:active {
       color: ${darkestColors.grey};
+    }
+  }
+
+  #disconnect {
+    background: ${({ theme }) =>
+      theme === 'light'
+        ? `${mediumColors.secondary}`
+        : `${mediumColors.primary}`};
+    font-size: 1.5em;
+    padding: 0.4em 0.4em;
+    border-radius: 50px;
+    color: ${darkestColors.grey};
+    &:hover {
+      outline-color: ${({ theme }) =>
+        theme === 'light'
+          ? `${mediumColors.secondary}`
+          : `${mediumColors.primary}`};
+      outline-style: solid;
+      outline-offset: 0.2em;
+    }
+    &:focus {
+      outline: 50px;
+      outline-color: ${({ theme }) =>
+        theme === 'light'
+          ? `${mediumColors.secondary}`
+          : `${mediumColors.primary}`};
+      outline-style: solid;
+      outline-offset: 0.2em;
     }
 
     @media screen and (max-width: 768px) {

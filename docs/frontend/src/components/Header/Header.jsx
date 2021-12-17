@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useUser } from '../../utils/hooks';
 import Dropdown from '../ResponsiveNavbar/Dropdown';
 import Navbar from '../ResponsiveNavbar/Navbar';
 
 function Header() {
+  const { isLoggedIn } = useUser();
   const [isOpen, setOpen] = useState(false);
 
   function toggle() {
@@ -11,8 +13,8 @@ function Header() {
 
   return (
     <>
-      <Dropdown isOpen={isOpen} toggle={toggle} />
-      <Navbar isOpen={isOpen} toggle={toggle} />
+      <Dropdown isLoggedIn={isLoggedIn} isOpen={isOpen} toggle={toggle} />
+      <Navbar isLoggedIn={isLoggedIn} isOpen={isOpen} toggle={toggle} />
     </>
   );
 }

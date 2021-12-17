@@ -99,4 +99,23 @@ const FormButton = styled.button`
   }
 `;
 
-export { FormLabel, FormInput, FormError, FormErrorMessage, FormButton };
+const FormErrorHandler = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${message.warningBackground};
+  color: ${message.warning};
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-size: 0.7em;
+  font-weight: 700;
+`;
+
+export {
+  FormLabel,
+  FormInput,
+  FormError,
+  FormErrorMessage,
+  FormButton,
+  FormErrorHandler,
+};

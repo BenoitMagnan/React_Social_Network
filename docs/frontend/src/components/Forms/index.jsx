@@ -1,14 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
+
 import {
   FormLabel,
   FormInput,
   FormError,
   FormErrorMessage,
   FormButton,
+  FormErrorHandler,
 } from './Forms';
-import { useTheme } from '../../utils/hooks';
+
+import { useTheme, useUser } from '../../utils/hooks';
 
 // FOR FURTHER USE
 // https://formik.org/docs/tutorial#leveraging-react-context
@@ -42,6 +47,9 @@ function validateEmail(value) {
 
 export default function SignupForm() {
   const { theme } = useTheme();
+  const { toggleIsLoggedIn } = useUser();
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
@@ -65,12 +73,41 @@ export default function SignupForm() {
           ),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          localStorage.clear('signup');
-          localStorage.setItem('signup', JSON.stringify(values));
-          console.log(localStorage);
+        setTimeout(async () => {
+          try {
+            const response = await fetch(
+              'http://localhost:3000/api/auth/signup',
+              {
+                method: 'post',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  firstName: values.firstName,
+                  lastName: values.lastName,
+                  email: values.email,
+                  password: values.password,
+                }),
+              }
+            );
+            if (response.status === 201) {
+              const value = await response.json();
+              toggleIsLoggedIn();
+              localStorage.setItem('userId', value.userId);
+              localStorage.setItem('token', value.token);
+              navigate('/profil');
+            } else if (response.status === 401) {
+              document.getElementById('errorHandler').innerHTML =
+                'Ce compte existe déjà !';
+            }
+          } catch (err) {
+            console.log(err);
+            document.getElementById('errorHandler').innerHTML =
+              'Une erreur inattendue est survenue: " ' + err + ' "';
+          }
           setSubmitting(false);
-        }, 400);
+        }, 500);
       }}
     >
       <Form>
@@ -93,8 +130,8 @@ export default function SignupForm() {
           name="password"
           type="password"
           placeholder="Mot de passe"
-          // validate={validatePassword}
         />
+        <FormErrorHandler id="errorHandler"></FormErrorHandler>
         <FormButton theme={theme} type="submit">
           Valider
         </FormButton>
@@ -105,6 +142,8 @@ export default function SignupForm() {
 
 function LoginForm() {
   const { theme } = useTheme();
+  const { toggleIsLoggedIn } = useUser();
+  const navigate = useNavigate();
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -120,10 +159,37 @@ function LoginForm() {
           ),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          localStorage.clear('login');
-          localStorage.setItem('login', JSON.stringify(values));
-          console.log(localStorage);
+        setTimeout(async () => {
+          try {
+            const response = await fetch(
+              'http://localhost:3000/api/auth/login',
+              {
+                method: 'post',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  email: values.email,
+                  password: values.password,
+                }),
+              }
+            );
+            const value = await response.json();
+            if (response.status === 401) {
+              document.getElementById('errorHandler').innerHTML = value.message;
+            } else if (response.status === 500) {
+              document.getElementById('errorHandler').innerHTML = value.message;
+            } else if (response.status === 200) {
+              console.log(value.message);
+              toggleIsLoggedIn();
+              localStorage.setItem('userId', value.userId);
+              localStorage.setItem('token', value.token);
+              navigate('/profil');
+            }
+          } catch (err) {
+            console.log(err);
+          }
           setSubmitting(false);
         }, 400);
       }}
@@ -143,6 +209,7 @@ function LoginForm() {
           placeholder="Mot de passe"
           // validate={validatePassword}
         />
+        <FormErrorHandler id="errorHandler"></FormErrorHandler>
         <FormButton theme={theme} type="submit">
           Valider
         </FormButton>
@@ -153,23 +220,43 @@ function LoginForm() {
 
 function TextAreaForm() {
   const { theme } = useTheme();
+  const token = localStorage.getItem('token');
   return (
     <Formik
       initialValues={{ textArea: '' }}
       validationSchema={Yup.object({
         textArea: Yup.string()
-          .min(5, 'Doit contenir au moins 2 charactères')
+          .min(5, 'Doit contenir au moins 5 charactères')
           .max(140, 'Ne doit pas dépasser 140 charactères')
           .required('Champs requis'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          localStorage.clear('post');
-          localStorage.setItem('post', JSON.stringify(values));
-          // A REMPLACER PAR LE BACKEND
-          document.getElementById('postHolder').innerHTML += JSON.parse(
-            localStorage.getItem('post')
-          ).textArea;
+        const userId = localStorage.getItem('userId');
+        setTimeout(async () => {
+          try {
+            const response = await fetch('http://localhost:3000/api/post', {
+              method: 'post',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+              },
+              body: JSON.stringify({
+                text: values.textArea,
+                userId: userId,
+              }),
+            });
+            const value = await response.json();
+            if (response.status === 201) {
+              document.getElementById('postHolder').innerHTML = value.message;
+            } else if (response.status === 500) {
+              document.getElementById('postHolder').innerHTML = value.message;
+            }
+          } catch (err) {
+            console.log(err);
+            document.getElementById('errorHandler').innerHTML =
+              'Une erreur inattendue est survenue: " ' + err + ' "';
+          }
           setSubmitting(false);
         }, 400);
       }}

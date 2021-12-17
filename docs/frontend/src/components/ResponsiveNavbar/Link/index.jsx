@@ -11,7 +11,7 @@ function Home() {
       to="/"
       aria-label="Se rendre à la page d'accueil"
       theme={theme}
-      logo
+      $logo
     >
       {theme === 'light' ? (
         <img
@@ -43,15 +43,15 @@ function About() {
   );
 }
 
-function Prout() {
+function Post() {
   const { theme } = useTheme();
   return (
     <StyledNavLink
-      to="/prout"
-      aria-label="Se rendre à la page Prout"
+      to="/post"
+      aria-label="Se rendre à la page Post"
       theme={theme}
     >
-      Prout
+      Post
     </StyledNavLink>
   );
 }
@@ -83,4 +83,17 @@ function Login() {
   );
 }
 
-export { Home, About, Prout, Signup, Login };
+function Profil() {
+  const { theme } = useTheme();
+  return (
+    <StyledNavLink
+      to="/profil"
+      aria-label="Se rendre à la page Profil"
+      theme={theme}
+    >
+      Profil
+    </StyledNavLink>
+  );
+}
+
+export { Home, About, Post, Signup, Login, Profil };

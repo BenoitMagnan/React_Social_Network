@@ -16,6 +16,25 @@ function ThemeProvider({ children }) {
   );
 }
 
+export const UserContext = createContext();
+
+export function UserProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const toggleIsLoggedIn = () => {
+    setIsLoggedIn(isLoggedIn === false ? true : false);
+    localStorage.setItem('isLoggedIn', !isLoggedIn);
+    console.log(JSON.parse(localStorage.getItem('isLoggedIn')));
+  };
+
+  return (
+    <UserContext.Provider
+      value={{ isLoggedIn, toggleIsLoggedIn, setIsLoggedIn }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+}
+
 const FormikContext = React.createContext({});
 
 function Formik({ children, ...props }) {

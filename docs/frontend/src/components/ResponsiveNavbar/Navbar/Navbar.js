@@ -3,7 +3,6 @@ import { FaBars } from 'react-icons/fa';
 import {
   darkestColors,
   darkerColors,
-  lighterColors,
   lightestColors,
   mediumColors,
 } from '../../../utils/style/colors/';

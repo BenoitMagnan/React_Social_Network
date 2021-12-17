@@ -33,8 +33,6 @@ function Home() {
           assumenda placeat.
         </p>
 
-        <TextAreaForm />
-
         <h2>Lorem ipsum dolor sit amet consectetur !</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima
