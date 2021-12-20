@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import {
-  darkerColors,
   darkestColors,
   lighterColors,
   lightestColors,
@@ -9,11 +8,23 @@ import {
 
 export const PostContainer = styled.div`
   display: flex;
+  &:not(:nth-child(4)) > * {
+    color: ${({ theme }) =>
+      theme === 'light' ? `${lightestColors.grey}` : `${darkestColors.grey}`};
+  }
+  &:nth-child(4) {
+    color: black;
+    font-weight: 700;
+    background: ${({ theme }) =>
+      theme === 'light'
+        ? `${lighterColors.secondary}`
+        : `${lighterColors.primary}`};
+  }
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   background: ${({ theme }) =>
-    theme === 'light' ? `${mediumColors.grey}` : `${lighterColors.grey}`};
+    theme === 'light' ? `${mediumColors.grey}` : `${lightestColors.grey}`};
   box-shadow: ${({ theme }) =>
     theme === 'light'
       ? `0px 0px 10px ${darkestColors.grey}`
@@ -29,8 +40,6 @@ export const PostContainer = styled.div`
 
 export const PostText = styled.span`
   margin: 0px 20px;
-  color: ${({ theme }) =>
-    theme === 'light' ? `${lightestColors.grey}` : `${darkestColors.grey}`};
   width: 100%;
   border-radius: 5px;
   & > * {

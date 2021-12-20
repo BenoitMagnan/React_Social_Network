@@ -18,8 +18,12 @@ function Profil() {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
 
+    const cleanUp = new AbortController();
+    const signal = cleanUp.signal;
+
     axios
       .get('http://localhost:3000/api/auth/profil', {
+        signal,
         params: { userId: userId },
         headers: {
           Accept: 'application/json',
@@ -33,6 +37,7 @@ function Profil() {
       .catch((error) => {
         console.log(error);
       });
+    return () => cleanUp.abort();
   }, []);
 
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));

@@ -4,7 +4,6 @@ import {
   darkestColors,
   lighterColors,
   lightestColors,
-  mediumColors,
 } from '../../utils/style/colors';
 
 export const InfosContainer = styled.div`

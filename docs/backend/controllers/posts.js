@@ -20,7 +20,7 @@ exports.createPost = (req, res) => {
 };
 
 exports.getPost = (req, res, next) => {
-  Post.findAll()
+  Post.findAll({ order: [['id', 'DESC']] })
     .then((post) => res.status(200).json({ post }))
     .catch((error) => res.status(400).json({ error }));
   console.log('Post récupérée');

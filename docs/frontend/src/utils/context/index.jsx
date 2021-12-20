@@ -22,7 +22,7 @@ export function UserProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toggleIsLoggedIn = () => {
     setIsLoggedIn(isLoggedIn === false ? true : false);
-    localStorage.setItem('isLoggedIn', !isLoggedIn);
+    localStorage.setItem('isLoggedIn', isLoggedIn);
     console.log(JSON.parse(localStorage.getItem('isLoggedIn')));
   };
 

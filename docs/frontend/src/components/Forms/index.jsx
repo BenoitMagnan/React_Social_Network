@@ -50,6 +50,9 @@ export default function SignupForm() {
   const { toggleIsLoggedIn } = useUser();
   const navigate = useNavigate();
 
+  const cleanUp = new AbortController();
+  const signal = cleanUp.signal;
+
   return (
     <Formik
       initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
@@ -78,6 +81,7 @@ export default function SignupForm() {
             const response = await fetch(
               'http://localhost:3000/api/auth/signup',
               {
+                signal,
                 method: 'post',
                 headers: {
                   Accept: 'application/json',
@@ -108,6 +112,7 @@ export default function SignupForm() {
           }
           setSubmitting(false);
         }, 500);
+        return () => cleanUp.abort();
       }}
     >
       <Form>
@@ -143,6 +148,10 @@ export default function SignupForm() {
 function LoginForm() {
   const { theme } = useTheme();
   const { toggleIsLoggedIn } = useUser();
+
+  const cleanUp = new AbortController();
+  const signal = cleanUp.signal;
+
   const navigate = useNavigate();
   return (
     <Formik
@@ -164,6 +173,7 @@ function LoginForm() {
             const response = await fetch(
               'http://localhost:3000/api/auth/login',
               {
+                signal,
                 method: 'post',
                 headers: {
                   Accept: 'application/json',
@@ -191,7 +201,8 @@ function LoginForm() {
             console.log(err);
           }
           setSubmitting(false);
-        }, 400);
+        }, 500);
+        return () => cleanUp.abort();
       }}
     >
       <Form>
@@ -221,6 +232,10 @@ function LoginForm() {
 function TextAreaForm() {
   const { theme } = useTheme();
   const token = localStorage.getItem('token');
+
+  const cleanUp = new AbortController();
+  const signal = cleanUp.signal;
+
   return (
     <Formik
       initialValues={{ textArea: '' }}
@@ -235,6 +250,7 @@ function TextAreaForm() {
         setTimeout(async () => {
           try {
             const response = await fetch('http://localhost:3000/api/post', {
+              signal,
               method: 'post',
               headers: {
                 Accept: 'application/json',
@@ -248,7 +264,7 @@ function TextAreaForm() {
             });
             const value = await response.json();
             if (response.status === 201) {
-              document.getElementById('postHolder').innerHTML = value.message;
+              console.log(value.message);
             } else if (response.status === 500) {
               document.getElementById('postHolder').innerHTML = value.message;
             }
@@ -258,7 +274,8 @@ function TextAreaForm() {
               'Une erreur inattendue est survenue: " ' + err + ' "';
           }
           setSubmitting(false);
-        }, 400);
+        }, 500);
+        return () => cleanUp.abort();
       }}
     >
       <Form>

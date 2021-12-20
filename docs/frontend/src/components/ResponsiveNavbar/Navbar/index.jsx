@@ -10,7 +10,7 @@ function Navbar({ toggle }) {
   const { theme } = useTheme();
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
 
-  if (!isLoggedIn) {
+  if (isLoggedIn) {
     return (
       <>
         <Nav theme={theme}>
@@ -25,11 +25,9 @@ function Navbar({ toggle }) {
               <Post />
             </NavLink>
             <NavLink>
-              <Signup />
+              <Profil />
             </NavLink>
-            <NavLink>
-              <Login />
-            </NavLink>
+            <Disconnect />
           </NavMenu>
         </Nav>
       </>
@@ -49,9 +47,11 @@ function Navbar({ toggle }) {
               <Post />
             </NavLink>
             <NavLink>
-              <Profil />
+              <Signup />
             </NavLink>
-            <Disconnect />
+            <NavLink>
+              <Login />
+            </NavLink>
           </NavMenu>
         </Nav>
       </>

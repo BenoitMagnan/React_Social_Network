@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import { useTheme } from '../../utils/hooks';
 import { StyledLink } from '../../utils/style/globalStyle';
-import { TextAreaForm } from '../../components/Forms';
 
 function Home() {
   const { theme } = useTheme();
