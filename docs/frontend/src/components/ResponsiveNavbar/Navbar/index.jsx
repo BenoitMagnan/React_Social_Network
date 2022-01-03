@@ -19,9 +19,6 @@ function Navbar({ toggle }) {
           <NavMenu>
             <AdjustMode />
             <NavLink>
-              <About />
-            </NavLink>
-            <NavLink>
               <Post />
             </NavLink>
             <NavLink>

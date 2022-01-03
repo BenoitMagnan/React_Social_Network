@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextAreaForm } from '../../components/Forms';
+import { TextAreaForm, CommentForm } from '../../components/Forms';
 import Header from '../../components/Header/Header';
 import { useTheme } from '../../utils/hooks';
-import { PostContainer, PostText } from './Post';
+import {
+  ButtonHolder,
+  Holder,
+  PostContainer,
+  PostHolder,
+  PostText,
+} from './Post';
+
+import { DeleteButton } from '../../components/Buttons/Button';
 
 function Post() {
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
   const [data, setData] = useState();
   const { theme } = useTheme();
-
   const cleanUp = new AbortController();
   const signal = cleanUp.signal;
 
@@ -25,6 +32,7 @@ function Post() {
         })
         .then((response) => {
           setData(response.data.post);
+          console.log(data);
         })
         .catch((error) => {
           console.log(error);
@@ -52,15 +60,47 @@ function Post() {
             <h1>Post</h1>
             <TextAreaForm />
           </div>
-          {/* A FAIRE ! RESOUDRE LE PROBLEME DE DATA UNDEFINED */}
           {data.map((post, index) => (
             <PostContainer
               key={`${post.id}-${index}`}
               theme={theme}
               post={post}
             >
-              <PostText theme={theme}>{post.text}</PostText>
-              <PostText theme={theme}>{post.createdAt}</PostText>
+              <Holder theme={theme}>
+                <PostHolder>
+                  <PostText theme={theme}>{post.text}</PostText>
+                  <PostText theme={theme}>{post.createdAt}</PostText>
+                  <PostText theme={theme}>{post.userId}</PostText>
+                </PostHolder>
+                <ButtonHolder theme={theme}>
+                  <DeleteButton
+                    theme={theme}
+                    onClick={() => {
+                      const token = localStorage.getItem('token');
+                      const userId = localStorage.getItem('userId');
+
+                      axios
+                        .delete('http://localhost:3000/api/post', {
+                          params: { id: post.id, userId: userId },
+                          headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + token,
+                          },
+                        })
+                        .then(() => {
+                          console.log('Votre post à bien été supprimé');
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });
+                    }}
+                  >
+                    X
+                  </DeleteButton>
+                </ButtonHolder>
+              </Holder>
+              <CommentForm />
             </PostContainer>
           ))}
         </>
@@ -83,7 +123,6 @@ function Post() {
           <div className="content">
             <h1>Derniers posts partagés</h1>
           </div>
-          {/* A FAIRE ! RESOUDRE LE PROBLEME DE DATA UNDEFINED */}
           {data.map((post, index) => (
             <PostContainer
               key={`${post.id}-${index}`}
@@ -92,6 +131,7 @@ function Post() {
             >
               <PostText theme={theme}>{post.text}</PostText>
               <PostText theme={theme}>{post.createdAt}</PostText>
+              <PostText theme={theme}>{post.userId}</PostText>
             </PostContainer>
           ))}
         </>

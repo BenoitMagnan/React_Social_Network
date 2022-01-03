@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./models');
 const usersRoute = require('./routes/users');
 const postsRoute = require('./routes/posts');
+const commentsRoute = require('./routes/comments');
 
 const app = express();
 app.use(express.json());
@@ -22,5 +23,6 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', usersRoute);
 app.use('/api/post', postsRoute);
+app.use('/api/comment', commentsRoute);
 
 module.exports = app;

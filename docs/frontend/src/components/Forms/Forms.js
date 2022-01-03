@@ -32,6 +32,7 @@ const FormInput = styled.input`
   &[type='textarea'] {
     box-sizing: border-box;
     padding-left: 10px;
+    padding-right: 10px;
   }
   &:hover {
     border: ${({ theme }) =>
@@ -111,6 +112,17 @@ const FormErrorHandler = styled.div`
   font-weight: 700;
 `;
 
+const Separator = styled.span`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 90%;
+  height: 2px;
+  border-radius: 1px;
+  background: ${({ theme }) =>
+    theme === 'light' ? `${darkerColors.grey}` : `${mediumColors.grey}`};
+`;
+
 export {
   FormLabel,
   FormInput,
@@ -118,4 +130,5 @@ export {
   FormErrorMessage,
   FormButton,
   FormErrorHandler,
+  Separator,
 };

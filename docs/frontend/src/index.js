@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 
 import Home from './pages/Home/';
-import About from './pages/About';
 import Post from './pages/Post';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -26,7 +25,6 @@ ReactDOM.render(
       <UserProvider>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/about" element={<About />}></Route>
           <Route path="/post" element={<Post />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>

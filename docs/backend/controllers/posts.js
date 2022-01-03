@@ -19,6 +19,15 @@ exports.createPost = (req, res) => {
     );
 };
 
+exports.deletePost = (req, res) => {
+  Post.destroy({
+    where: [{ id: req.param('id') }, { userId: req.param('userId') }],
+  })
+    .then(() => res.status(200).json({ message: 'Post supprimé' }))
+    .catch((error) => res.status(400).json({ message: error.message }));
+  console.log('Post supprimé !');
+};
+
 exports.getPost = (req, res, next) => {
   Post.findAll({ order: [['id', 'DESC']] })
     .then((post) => res.status(200).json({ post }))

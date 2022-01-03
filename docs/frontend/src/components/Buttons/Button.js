@@ -102,8 +102,8 @@ const StyledButton = styled.button`
     outline-width: 0.28em;
   }
   &.delete {
-    width: 45%;
     max-width: 350px;
+    text-align: center;
     justify-content: center;
     margin: 40px auto;
     text-transform: uppercase;
@@ -121,4 +121,40 @@ const StyledButton = styled.button`
   }
 `;
 
-export { AdjustButton, DisconnectButton, StyledButton };
+const DeleteButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto;
+  color: ${({ theme }) =>
+    theme === 'light' ? `${message.warning}` : `${lightestColors.grey}`};
+  outline-color: ${({ theme }) =>
+    theme === 'light' ? `${message.warningBackground}` : `${message.warning}`};
+  background: ${({ theme }) =>
+    theme === 'light' ? `${message.warningBackground}` : `${message.warning}`};
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    transition: 0;
+    color: ${({ theme }) =>
+      theme === 'light' ? `${darkestColors.grey}` : `${lightestColors.grey}`};
+    outline-color: ${({ theme }) =>
+      theme === 'light' ? `${message.warning}` : `${message.warning}`};
+    outline-style: solid;
+    outline-offset: 0.3em;
+  }
+  &:focus {
+    outline-color: ${({ theme }) =>
+      theme === 'light' ? `${message.warning}` : `${mediumColors.primary}`};
+    outline-style: solid;
+    outline-offset: 0.3em;
+    outline-width: 0.28em;
+  }
+`;
+
+export { AdjustButton, DisconnectButton, StyledButton, DeleteButton };

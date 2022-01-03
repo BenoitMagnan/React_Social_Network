@@ -13,6 +13,8 @@ import {
   FormErrorHandler,
 } from './Forms';
 
+import { Comment, CommentButton, CommentError } from './Comment';
+
 import { useTheme, useUser } from '../../utils/hooks';
 
 // FOR FURTHER USE
@@ -28,6 +30,22 @@ function TextInput({ label, ...props }) {
         <FormError>
           <FormErrorMessage>{meta.error}</FormErrorMessage>
         </FormError>
+      ) : null}
+    </>
+  );
+}
+
+function CommentInput({ label, ...props }) {
+  const [field, meta] = useField(props);
+  const { theme } = useTheme();
+  return (
+    <>
+      <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
+      <FormInput theme={theme} className="text-input" {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <CommentError>
+          <FormErrorMessage>{meta.error}</FormErrorMessage>
+        </CommentError>
       ) : null}
     </>
   );
@@ -286,6 +304,7 @@ function TextAreaForm() {
           placeholder="C'est un gars, il rentre dans un bar."
         />
         <div id="postHolder"></div>
+        <FormErrorHandler id="errorHandler"></FormErrorHandler>
         <FormButton theme={theme} type="submit">
           Valider
         </FormButton>
@@ -294,4 +313,75 @@ function TextAreaForm() {
   );
 }
 
-export { LoginForm, TextAreaForm };
+function CommentForm() {
+  const { theme } = useTheme();
+  const token = localStorage.getItem('token');
+
+  const cleanUp = new AbortController();
+  const signal = cleanUp.signal;
+
+  return (
+    <Formik
+      initialValues={{ textArea: '' }}
+      validationSchema={Yup.object({
+        textArea: Yup.string()
+          .min(5, 'Doit contenir au moins 5 charactères')
+          .max(140, 'Ne doit pas dépasser 140 charactères')
+          .required('Champs requis'),
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log('coucou');
+
+        const userId = localStorage.getItem('userId');
+        setTimeout(async () => {
+          try {
+            const response = await fetch('http://localhost:3000/api/comment', {
+              signal,
+              method: 'post',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+              },
+              body: JSON.stringify({
+                text: values.textArea,
+                userId: userId,
+              }),
+            });
+            const value = await response.json();
+            if (response.status === 200) {
+              console.log(value.message);
+            } else {
+              document.getElementById('commentHolder').innerHTML =
+                value.message;
+            }
+          } catch (err) {
+            console.log(err);
+            document.getElementById('errorHandler').innerHTML =
+              'Une erreur inattendue est survenue: " ' + err + ' "';
+          }
+          setSubmitting(false);
+        }, 500);
+        return () => cleanUp.abort();
+      }}
+    >
+      <Form style={{ width: '90%' }}>
+        <div id="commentHolder"></div>
+        <Comment theme={theme}>
+          <h1>Commentaires :</h1>
+          <CommentInput
+            theme={theme}
+            name="textArea"
+            type="textarea"
+            placeholder="Laissez votre commentaire"
+          />
+          <CommentButton theme={theme} type="submit">
+            Envoyer
+          </CommentButton>
+        </Comment>
+      </Form>
+    </Formik>
+  );
+}
+
+export { LoginForm, TextAreaForm, CommentForm };
