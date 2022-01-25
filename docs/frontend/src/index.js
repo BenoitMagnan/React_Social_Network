@@ -18,12 +18,21 @@ import { UserProvider } from './utils/context/';
 import GlobalStyle from './utils/style/globalStyle';
 import './utils/style/index.css';
 
+function IsTokenExpired() {
+  const timeStamp = parseInt(localStorage.getItem('timeStamp'));
+  const loginDate = parseInt(localStorage.getItem('loginDate'));
+  if (timeStamp && loginDate && loginDate > loginDate + timeStamp) {
+    localStorage.setItem('isLoggedIn', false);
+    localStorage.clear();
+  }
+}
+
 ReactDOM.render(
   <Router>
     <ThemeProvider>
       <GlobalStyle />
       <UserProvider>
-        <Routes>
+        <Routes onEnter={IsTokenExpired()}>
           <Route path="/" element={<Home />}></Route>
           <Route path="/post" element={<Post />}></Route>
           <Route path="/signup" element={<Signup />}></Route>

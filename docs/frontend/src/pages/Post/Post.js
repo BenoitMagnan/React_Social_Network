@@ -58,6 +58,7 @@ export const ButtonHolder = styled.div`
 `;
 export const PostText = styled.span`
   width: 100%;
+  padding: 0 20px;
   border-radius: 5px;
   & > * {
     width: 100%;

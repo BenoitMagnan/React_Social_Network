@@ -19,7 +19,7 @@ function ThemeProvider({ children }) {
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const toggleIsLoggedIn = () => {
     setIsLoggedIn(isLoggedIn === false ? true : false);
     localStorage.setItem('isLoggedIn', isLoggedIn);

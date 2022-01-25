@@ -15,6 +15,7 @@ import { DeleteButton } from '../../components/Buttons/Button';
 
 function Post() {
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+  const userId = localStorage.getItem('userId');
   const [data, setData] = useState();
   const { theme } = useTheme();
   const cleanUp = new AbortController();
@@ -37,7 +38,7 @@ function Post() {
         .catch((error) => {
           console.log(error);
         });
-    }, 200);
+    }, 500);
     return () => cleanUp.abort();
   });
 
@@ -73,31 +74,33 @@ function Post() {
                   <PostText theme={theme}>{post.userId}</PostText>
                 </PostHolder>
                 <ButtonHolder theme={theme}>
-                  <DeleteButton
-                    theme={theme}
-                    onClick={() => {
-                      const token = localStorage.getItem('token');
-                      const userId = localStorage.getItem('userId');
+                  {userId === post.userId ? (
+                    <DeleteButton
+                      theme={theme}
+                      onClick={() => {
+                        const token = localStorage.getItem('token');
+                        const userId = localStorage.getItem('userId');
 
-                      axios
-                        .delete('http://localhost:3000/api/post', {
-                          params: { id: post.id, userId: userId },
-                          headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                            Authorization: 'Bearer ' + token,
-                          },
-                        })
-                        .then(() => {
-                          console.log('Votre post à bien été supprimé');
-                        })
-                        .catch((error) => {
-                          console.log(error);
-                        });
-                    }}
-                  >
-                    X
-                  </DeleteButton>
+                        axios
+                          .delete('http://localhost:3000/api/post', {
+                            params: { id: post.id, userId: userId },
+                            headers: {
+                              Accept: 'application/json',
+                              'Content-Type': 'application/json',
+                              Authorization: 'Bearer ' + token,
+                            },
+                          })
+                          .then(() => {
+                            console.log('Votre post à bien été supprimé');
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      }}
+                    >
+                      X
+                    </DeleteButton>
+                  ) : null}
                 </ButtonHolder>
               </Holder>
               <CommentForm />

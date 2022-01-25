@@ -6,6 +6,7 @@ const db = require('../models');
 const User = db.User;
 
 exports.signup = (req, res) => {
+  const timeStamp = 3600000;
   const passwordValidator =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -25,8 +26,9 @@ exports.signup = (req, res) => {
               message: 'Utilisateur créé !',
               userId: user.userId,
               token: jwt.sign({ userId: user.userId }, process.env.MY_Token, {
-                expiresIn: '1h',
+                expiresIn: timeStamp,
               }),
+              timeStamp: timeStamp,
             })
           )
           .catch((error) =>
@@ -45,6 +47,7 @@ exports.signup = (req, res) => {
 };
 
 exports.login = (req, res, next) => {
+  const timeStamp = 3600000;
   User.findOne({
     where: {
       email: req.body.email,
@@ -66,8 +69,9 @@ exports.login = (req, res, next) => {
             message: 'Utilisateur connecté !',
             userId: user.userId,
             token: jwt.sign({ userId: user.userId }, process.env.MY_Token, {
-              expiresIn: '1h',
+              expiresIn: timeStamp,
             }),
+            timeStamp: timeStamp,
           });
         })
         .catch((error) => res.status(500).json({ message: error }));

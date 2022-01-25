@@ -5,7 +5,6 @@ import {
   lighterColors,
   lightestColors,
   mediumColors,
-  message,
 } from '../../utils/style/colors';
 
 export const Comment = styled.div`
@@ -18,8 +17,8 @@ export const Comment = styled.div`
     theme === 'light'
       ? `0 0 5px ${darkerColors.grey}`
       : `0 0 5px ${mediumColors.grey}`};
-  width: 100%;
-  margin: 1.5rem 0;
+  width: 90%;
+  margin: 1.5rem auto;
   font-size: 0.8rem;
   border-radius: 5px;
   appearance: none;

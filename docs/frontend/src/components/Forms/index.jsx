@@ -118,6 +118,8 @@ export default function SignupForm() {
               toggleIsLoggedIn();
               localStorage.setItem('userId', value.userId);
               localStorage.setItem('token', value.token);
+              localStorage.setItem('timeStamp', value.timeStamp);
+              localStorage.setItem('loginDate', Date.now());
               navigate('/profil');
             } else if (response.status === 401) {
               document.getElementById('errorHandler').innerHTML =
@@ -213,6 +215,8 @@ function LoginForm() {
               toggleIsLoggedIn();
               localStorage.setItem('userId', value.userId);
               localStorage.setItem('token', value.token);
+              localStorage.setItem('timeStamp', value.timeStamp);
+              localStorage.setItem('loginDate', Date.now());
               navigate('/profil');
             }
           } catch (err) {
