@@ -118,8 +118,8 @@ export default function SignupForm() {
               toggleIsLoggedIn();
               localStorage.setItem('userId', value.userId);
               localStorage.setItem('token', value.token);
-              localStorage.setItem('timeStamp', value.timeStamp);
-              localStorage.setItem('loginDate', Date.now());
+              // localStorage.setItem('expirationDate', value.expirationDate);
+              // localStorage.setItem('loginDate', Date.now());
               navigate('/profil');
             } else if (response.status === 401) {
               document.getElementById('errorHandler').innerHTML =
@@ -215,8 +215,8 @@ function LoginForm() {
               toggleIsLoggedIn();
               localStorage.setItem('userId', value.userId);
               localStorage.setItem('token', value.token);
-              localStorage.setItem('timeStamp', value.timeStamp);
-              localStorage.setItem('loginDate', Date.now());
+              // localStorage.setItem('expirationDate', value.expirationDate);
+              // localStorage.setItem('loginDate', Date.now());
               navigate('/profil');
             }
           } catch (err) {
@@ -252,6 +252,8 @@ function LoginForm() {
 }
 
 function TextAreaForm() {
+  const { toggleIsLoggedIn } = useUser();
+  const navigate = useNavigate();
   const { theme } = useTheme();
   const token = localStorage.getItem('token');
 
@@ -285,7 +287,12 @@ function TextAreaForm() {
               }),
             });
             const value = await response.json();
-            if (response.status === 201) {
+            if (response.status === 403) {
+              toggleIsLoggedIn();
+              localStorage.clear();
+              navigate('/login');
+              console.log(localStorage);
+            } else if (response.status === 201) {
               console.log(value.message);
             } else if (response.status === 500) {
               document.getElementById('postHolder').innerHTML = value.message;

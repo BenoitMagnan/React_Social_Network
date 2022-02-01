@@ -35,8 +35,15 @@ function Profil() {
         setData(response.data[0]);
       })
       .catch((error) => {
-        console.log(error);
+        const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+        if (isLoggedIn === true) {
+          localStorage.clear();
+          localStorage.setItem('isLoggedIn', false);
+          window.location.href = 'http://localhost:3001/login';
+          // navigate('/');
+        }
       });
+
     return () => cleanUp.abort();
   }, []);
 

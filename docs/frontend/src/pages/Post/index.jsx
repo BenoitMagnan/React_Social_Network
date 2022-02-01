@@ -15,9 +15,12 @@ import { DeleteButton } from '../../components/Buttons/Button';
 
 function Post() {
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+
   const userId = localStorage.getItem('userId');
   const [data, setData] = useState();
+
   const { theme } = useTheme();
+
   const cleanUp = new AbortController();
   const signal = cleanUp.signal;
 
@@ -38,7 +41,7 @@ function Post() {
         .catch((error) => {
           console.log(error);
         });
-    }, 500);
+    });
     return () => cleanUp.abort();
   });
 

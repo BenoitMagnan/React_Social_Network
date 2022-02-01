@@ -21,9 +21,8 @@ export const UserContext = createContext();
 export function UserProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const toggleIsLoggedIn = () => {
-    setIsLoggedIn(isLoggedIn === false ? true : false);
+    setIsLoggedIn(isLoggedIn === true ? false : true);
     localStorage.setItem('isLoggedIn', isLoggedIn);
-    console.log(JSON.parse(localStorage.getItem('isLoggedIn')));
   };
 
   return (
