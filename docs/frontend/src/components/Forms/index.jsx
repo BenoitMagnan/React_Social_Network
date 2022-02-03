@@ -266,7 +266,7 @@ function TextAreaForm() {
       validationSchema={Yup.object({
         textArea: Yup.string()
           .min(5, 'Doit contenir au moins 5 charactères')
-          .max(140, 'Ne doit pas dépasser 140 charactères')
+          .max(2000, 'Ne doit pas dépasser 2000 charactères')
           .required('Champs requis'),
       })}
       onSubmit={(values, { setSubmitting }) => {
@@ -324,7 +324,7 @@ function TextAreaForm() {
   );
 }
 
-function CommentForm() {
+function CommentForm(props) {
   const { theme } = useTheme();
   const token = localStorage.getItem('token');
 
@@ -337,12 +337,10 @@ function CommentForm() {
       validationSchema={Yup.object({
         textArea: Yup.string()
           .min(5, 'Doit contenir au moins 5 charactères')
-          .max(140, 'Ne doit pas dépasser 140 charactères')
+          .max(2000, 'Ne doit pas dépasser 2000 charactères')
           .required('Champs requis'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        console.log('coucou');
-
         const userId = localStorage.getItem('userId');
         setTimeout(async () => {
           try {
@@ -357,6 +355,7 @@ function CommentForm() {
               body: JSON.stringify({
                 text: values.textArea,
                 userId: userId,
+                PostId: parseInt(props.postId),
               }),
             });
             const value = await response.json();

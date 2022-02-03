@@ -1,6 +1,7 @@
 const db = require('../models');
-const { post } = require('../routes/users');
+
 const Post = db.Post;
+const Comment = db.Comment;
 
 exports.createPost = (req, res) => {
   Post.create({
@@ -29,7 +30,10 @@ exports.deletePost = (req, res) => {
 };
 
 exports.getPost = (req, res, next) => {
-  Post.findAll({ order: [['id', 'DESC']] })
+  Post.findAll({
+    order: [['createdAt', 'DESC']],
+    include: [Comment],
+  })
     .then((post) => res.status(200).json({ post }))
     .catch((error) => res.status(400).json({ error }));
   console.log('Post récupérée');

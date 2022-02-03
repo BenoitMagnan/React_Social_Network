@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {
   darkestColors,
+  lighterColors,
   lightestColors,
   mediumColors,
 } from '../../utils/style/colors';
@@ -56,6 +57,7 @@ export const ButtonHolder = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export const PostText = styled.span`
   width: 100%;
   padding: 0 20px;
@@ -64,5 +66,37 @@ export const PostText = styled.span`
     width: 100%;
     text-align: center;
     margin: 0;
+  }
+`;
+
+export const CommentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: ${({ theme }) =>
+    theme === 'light' ? `${lightestColors.grey}` : `${lightestColors.grey}`};
+  width: 90%;
+  min-width: 330px;
+  padding: 5px 0;
+  margin: 10px auto;
+  border: 1px solid ${mediumColors.grey};
+  font-size: 0.9rem;
+  @media screen and (max-width: 800px) {
+    width: 60%;
+  }
+`;
+
+export const CommentText = styled.span`
+  color: ${darkestColors.grey};
+  width: 100%;
+  padding: 0 20px;
+  border-radius: 5px;
+  & > * {
+    width: 100%;
+  }
+  & .info {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 0.7rem;
   }
 `;

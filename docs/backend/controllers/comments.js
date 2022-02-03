@@ -5,6 +5,7 @@ exports.createComment = (req, res) => {
   Comment.create({
     text: req.body.text,
     userId: req.body.userId,
+    PostId: req.body.PostId,
   })
     .then((comment) =>
       res.status(200).json({
@@ -23,4 +24,13 @@ exports.getComment = (req, res, next) => {
     .then((comment) => res.status(200).json({ comment }))
     .catch((error) => res.status(400).json({ error }));
   console.log('Commentaire récupéré');
+};
+
+exports.deleteComment = (req, res) => {
+  Comment.destroy({
+    where: [{ id: req.param('id') }, { userId: req.param('userId') }],
+  })
+    .then(() => res.status(200).json({ message: 'Commentaire supprimé' }))
+    .catch((error) => res.status(400).json({ message: error.message }));
+  console.log('Commentaire supprimé !');
 };

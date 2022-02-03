@@ -157,4 +157,46 @@ const DeleteButton = styled.button`
   }
 `;
 
-export { AdjustButton, DisconnectButton, StyledButton, DeleteButton };
+const CommentDeleteButton = styled.button`
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  width: 0.8rem;
+  height: 0.8rem;
+  color: ${({ theme }) =>
+    theme === 'light' ? `${message.warning}` : `${lightestColors.grey}`};
+  outline-color: ${({ theme }) =>
+    theme === 'light' ? `${message.warningBackground}` : `${message.warning}`};
+  background: ${({ theme }) =>
+    theme === 'light' ? `${message.warningBackground}` : `${message.warning}`};
+  padding: 0.8rem;
+  margin: 1rem;
+  font-size: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+  &:hover {
+    transition: 0;
+    color: ${({ theme }) =>
+      theme === 'light' ? `${darkestColors.grey}` : `${lightestColors.grey}`};
+    outline-color: ${({ theme }) =>
+      theme === 'light' ? `${message.warning}` : `${message.warning}`};
+    outline-style: solid;
+    outline-offset: 0.3em;
+  }
+  &:focus {
+    outline-color: ${({ theme }) =>
+      theme === 'light' ? `${message.warning}` : `${mediumColors.primary}`};
+    outline-style: solid;
+    outline-offset: 0.3em;
+    outline-width: 0.28em;
+  }
+`;
+
+export {
+  AdjustButton,
+  DisconnectButton,
+  StyledButton,
+  DeleteButton,
+  CommentDeleteButton,
+};

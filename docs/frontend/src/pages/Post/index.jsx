@@ -9,9 +9,14 @@ import {
   PostContainer,
   PostHolder,
   PostText,
+  CommentContainer,
+  CommentText,
 } from './Post';
 
-import { DeleteButton } from '../../components/Buttons/Button';
+import {
+  CommentDeleteButton,
+  DeleteButton,
+} from '../../components/Buttons/Button';
 
 function Post() {
   const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
@@ -41,7 +46,7 @@ function Post() {
         .catch((error) => {
           console.log(error);
         });
-    });
+    }, 500);
     return () => cleanUp.abort();
   });
 
@@ -75,7 +80,60 @@ function Post() {
                   <PostText theme={theme}>{post.text}</PostText>
                   <PostText theme={theme}>{post.createdAt}</PostText>
                   <PostText theme={theme}>{post.userId}</PostText>
+                  {data[index].Comments.map((Comments, index) => (
+                    <CommentContainer
+                      key={`${Comments.id}-${index}`}
+                      theme={theme}
+                      Comments={Comments}
+                    >
+                      <CommentText
+                        key={`${Comments.id}-${index}`}
+                        theme={theme}
+                      >
+                        {Comments.text}
+                        <div class="info">
+                          <p>{Comments.userId}</p>
+                          <p>{Comments.createdAt}</p>
+                        </div>
+                      </CommentText>
+                      <ButtonHolder theme={theme}>
+                        {userId === Comments.userId ? (
+                          <CommentDeleteButton
+                            theme={theme}
+                            onClick={() => {
+                              const token = localStorage.getItem('token');
+                              const userId = localStorage.getItem('userId');
+
+                              axios
+                                .delete('http://localhost:3000/api/comment', {
+                                  params: {
+                                    id: Comments.id,
+                                    userId: userId,
+                                  },
+                                  headers: {
+                                    Accept: 'application/json',
+                                    'Content-Type': 'application/json',
+                                    Authorization: 'Bearer ' + token,
+                                  },
+                                })
+                                .then(() => {
+                                  console.log(
+                                    'Votre commentaire à bien été supprimé'
+                                  );
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                });
+                            }}
+                          >
+                            X
+                          </CommentDeleteButton>
+                        ) : null}
+                      </ButtonHolder>
+                    </CommentContainer>
+                  ))}
                 </PostHolder>
+
                 <ButtonHolder theme={theme}>
                   {userId === post.userId ? (
                     <DeleteButton
@@ -106,7 +164,7 @@ function Post() {
                   ) : null}
                 </ButtonHolder>
               </Holder>
-              <CommentForm />
+              <CommentForm postId={`${post.id}`} />
             </PostContainer>
           ))}
         </>

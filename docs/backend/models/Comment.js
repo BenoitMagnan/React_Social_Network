@@ -1,18 +1,9 @@
 const { Model } = require('sequelize');
-const { Sequelize } = require('.');
 
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
     text: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    postId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Posts',
-        key: 'id',
-      },
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     userId: {
@@ -21,5 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Comment.associate = (models) => {
+    Comment.belongsTo(models.Post, { onDelete: 'CASCADE', allowNull: false });
+  };
   return Comment;
 };

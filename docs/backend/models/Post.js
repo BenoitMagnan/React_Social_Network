@@ -3,7 +3,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
     text: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     userId: {
@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+
+  Post.associate = (models) => {
+    Post.hasMany(models.Comment);
+  };
 
   return Post;
 };

@@ -13,7 +13,10 @@ function Disconnect() {
       <DisconnectButton
         theme={theme}
         onClick={() =>
-          toggleIsLoggedIn() / localStorage.clear() / navigate('/login')
+          toggleIsLoggedIn() /
+          localStorage.clear() /
+          localStorage.setItem('isLoggedIn', false) /
+          navigate('/login')
         }
       >
         <FaPowerOff />

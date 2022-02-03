@@ -25,7 +25,7 @@ exports.signup = (req, res) => {
               message: 'Utilisateur créé !',
               userId: user.userId,
               token: jwt.sign({ userId: user.userId }, process.env.MY_Token, {
-                expiresIn: '30s',
+                expiresIn: '1h',
               }),
             })
           )
@@ -66,7 +66,7 @@ exports.login = (req, res, next) => {
             message: 'Utilisateur connecté !',
             userId: user.userId,
             token: jwt.sign({ userId: user.userId }, process.env.MY_Token, {
-              expiresIn: '30s',
+              expiresIn: '1h',
             }),
           });
         })
