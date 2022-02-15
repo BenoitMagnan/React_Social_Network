@@ -108,7 +108,7 @@ function Post() {
                               day: '2-digit',
                               hour: '2-digit',
                               minute: '2-digit',
-                            }).format(new Date(post.createdAt))}
+                            }).format(new Date(Comments.createdAt))}
                           </p>
                         </div>
                       </CommentText>
@@ -209,9 +209,47 @@ function Post() {
               theme={theme}
               post={post}
             >
-              <PostText theme={theme}>{post.text}</PostText>
-              <PostText theme={theme}>{post.createdAt}</PostText>
-              <PostText theme={theme}>{post.userId}</PostText>
+              <Holder theme={theme}>
+                <PostHolder>
+                  <PostText theme={theme}>{post.text}</PostText>
+                  <PostText theme={theme}>
+                    {new Intl.DateTimeFormat('fr-FR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    }).format(new Date(post.createdAt))}
+                  </PostText>
+                  <PostText theme={theme}>{post.userId}</PostText>
+                  {data[index].Comments.map((Comments, index) => (
+                    <CommentContainer
+                      key={`${Comments.id}-${index}`}
+                      theme={theme}
+                      Comments={Comments}
+                    >
+                      <CommentText
+                        key={`${Comments.id}-${index}`}
+                        theme={theme}
+                      >
+                        {Comments.text}
+                        <div class="info">
+                          <p>{Comments.userId}</p>
+                          <p>
+                            {new Intl.DateTimeFormat('fr-FR', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: '2-digit',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            }).format(new Date(Comments.createdAt))}
+                          </p>
+                        </div>
+                      </CommentText>
+                    </CommentContainer>
+                  ))}
+                </PostHolder>
+              </Holder>
             </PostContainer>
           ))}
         </>
