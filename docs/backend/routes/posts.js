@@ -4,10 +4,7 @@ const postsController = require('../controllers/posts');
 const auth = require('../middleware/auth.js');
 
 router.post('/', auth, postsController.createPost);
-// router.post('/:id/like', postsController.likeSauce);
-// router.put('/:id', auth, postsController.modifySauce);
 router.delete('/', auth, postsController.deletePost);
 router.get('/', postsController.getPost);
-// router.get('/:id', auth, postsController.getSauceById);
 
 module.exports = router;

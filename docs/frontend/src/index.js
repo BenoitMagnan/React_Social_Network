@@ -58,7 +58,6 @@ function IsTokenExpired() {
     .catch(() => {
       localStorage.clear();
       localStorage.setItem('isLoggedIn', false);
-      console.log(localStorage);
       ReactDOM.render(
         <Router>
           <ThemeProvider>
@@ -78,13 +77,6 @@ function IsTokenExpired() {
         document.getElementById('root')
       );
     });
-
-  // window.location.assign('http://localhost:3001/login');
-  // const timeStamp = parseInt(localStorage.getItem('timeStamp'));
-  // const loginDate = parseInt(localStorage.getItem('loginDate'));
-  // if (timeStamp && loginDate && loginDate > loginDate + timeStamp) {
-  //   localStorage.setItem('isLoggedIn', false);
-  //   localStorage.clear();
-  // }
 }
+
 IsTokenExpired();

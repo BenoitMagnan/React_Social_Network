@@ -41,7 +41,6 @@ function Post() {
         })
         .then((response) => {
           setData(response.data.post);
-          console.log(data);
         })
         .catch((error) => {
           console.log(error);
@@ -99,7 +98,7 @@ function Post() {
                         theme={theme}
                       >
                         {Comments.text}
-                        <div class="info">
+                        <div className="info">
                           <p>{Comments.userId}</p>
                           <p>
                             {new Intl.DateTimeFormat('fr-FR', {
@@ -233,7 +232,7 @@ function Post() {
                         theme={theme}
                       >
                         {Comments.text}
-                        <div class="info">
+                        <div className="info">
                           <p>{Comments.userId}</p>
                           <p>
                             {new Intl.DateTimeFormat('fr-FR', {

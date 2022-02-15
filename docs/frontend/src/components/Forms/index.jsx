@@ -17,8 +17,6 @@ import { Comment, CommentButton, CommentError } from './Comment';
 
 import { useTheme, useUser } from '../../utils/hooks';
 
-// FOR FURTHER USE
-// https://formik.org/docs/tutorial#leveraging-react-context
 function TextInput({ label, ...props }) {
   const [field, meta] = useField(props);
   const { theme } = useTheme();
@@ -118,8 +116,6 @@ export default function SignupForm() {
               toggleIsLoggedIn();
               localStorage.setItem('userId', value.userId);
               localStorage.setItem('token', value.token);
-              // localStorage.setItem('expirationDate', value.expirationDate);
-              // localStorage.setItem('loginDate', Date.now());
               navigate('/profil');
             } else if (response.status === 401) {
               document.getElementById('errorHandler').innerHTML =
@@ -211,12 +207,9 @@ function LoginForm() {
             } else if (response.status === 500) {
               document.getElementById('errorHandler').innerHTML = value.message;
             } else if (response.status === 200) {
-              console.log(value.message);
               toggleIsLoggedIn();
               localStorage.setItem('userId', value.userId);
               localStorage.setItem('token', value.token);
-              // localStorage.setItem('expirationDate', value.expirationDate);
-              // localStorage.setItem('loginDate', Date.now());
               navigate('/profil');
             }
           } catch (err) {
@@ -291,7 +284,6 @@ function TextAreaForm() {
               toggleIsLoggedIn();
               localStorage.clear();
               navigate('/login');
-              console.log(localStorage);
             } else if (response.status === 201) {
               console.log(value.message);
             } else if (response.status === 500) {
