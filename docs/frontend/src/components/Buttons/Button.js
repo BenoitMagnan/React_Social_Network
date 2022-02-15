@@ -155,6 +155,11 @@ const DeleteButton = styled.button`
     outline-offset: 0.3em;
     outline-width: 0.28em;
   }
+  @media screen and (max-width: 800px) {
+    margin: -100%;
+    background: transparent;
+    color: ${darkestColors.grey};
+  }
 `;
 
 const CommentDeleteButton = styled.button`

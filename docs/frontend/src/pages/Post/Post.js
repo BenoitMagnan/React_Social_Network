@@ -79,7 +79,7 @@ export const CommentContainer = styled.div`
   min-width: 330px;
   padding: 5px 0;
   margin: 10px auto;
-  border: 1px solid ${mediumColors.grey};
+  box-shadow: 0px 0px 2px ${mediumColors.grey};
   font-size: 0.9rem;
   @media screen and (max-width: 800px) {
     width: 60%;

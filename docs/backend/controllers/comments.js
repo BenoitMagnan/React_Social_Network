@@ -20,7 +20,7 @@ exports.createComment = (req, res) => {
 };
 
 exports.getComment = (req, res, next) => {
-  Comment.findAll({ order: [['id', 'DESC']] })
+  Comment.findAll({ order: [['id', 'ASC']] })
     .then((comment) => res.status(200).json({ comment }))
     .catch((error) => res.status(400).json({ error }));
   console.log('Commentaire récupéré');

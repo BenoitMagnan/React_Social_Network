@@ -78,7 +78,15 @@ function Post() {
               <Holder theme={theme}>
                 <PostHolder>
                   <PostText theme={theme}>{post.text}</PostText>
-                  <PostText theme={theme}>{post.createdAt}</PostText>
+                  <PostText theme={theme}>
+                    {new Intl.DateTimeFormat('fr-FR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    }).format(new Date(post.createdAt))}
+                  </PostText>
                   <PostText theme={theme}>{post.userId}</PostText>
                   {data[index].Comments.map((Comments, index) => (
                     <CommentContainer
@@ -93,7 +101,15 @@ function Post() {
                         {Comments.text}
                         <div class="info">
                           <p>{Comments.userId}</p>
-                          <p>{Comments.createdAt}</p>
+                          <p>
+                            {new Intl.DateTimeFormat('fr-FR', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: '2-digit',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            }).format(new Date(post.createdAt))}
+                          </p>
                         </div>
                       </CommentText>
                       <ButtonHolder theme={theme}>

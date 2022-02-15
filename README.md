@@ -1,6 +1,6 @@
 ### `npm i`
 
-This command will install every package necessary to run the app
+This command will install every package necessary to run the app :
 
 FRONTEND :
 - REACT.js : (react-router-dom / react-dom / react-icons / react-scripts)
