@@ -16,7 +16,7 @@ function Dropdown({ isOpen, toggle }) {
   const { theme } = useTheme();
   const { isLoggedIn } = useUser();
 
-  if (!isLoggedIn) {
+  if (isLoggedIn === true) {
     return (
       <DropdownContainer isOpen={isOpen} onClick={toggle} theme={theme}>
         <Icon onClick={toggle}>

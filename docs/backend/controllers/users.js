@@ -25,7 +25,7 @@ exports.signup = (req, res) => {
               message: 'Utilisateur créé !',
               userId: user.userId,
               token: jwt.sign({ userId: user.userId }, process.env.MY_Token, {
-                expiresIn: '1h',
+                expiresIn: '10s',
               }),
             })
           )

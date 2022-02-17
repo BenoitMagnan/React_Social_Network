@@ -74,11 +74,11 @@ export default function SignupForm() {
       initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
       validationSchema={Yup.object({
         firstName: Yup.string()
-          .min(2, 'Doit contenir au moins 3 charactères')
+          .min(2, 'Doit contenir au moins 2 charactères')
           .max(15, 'Ne doit pas dépasser 15 charactères')
           .required('Champs requis'),
         lastName: Yup.string()
-          .min(2, 'Doit contenir au moins 3 charactères')
+          .min(2, 'Doit contenir au moins 2 charactères')
           .max(20, 'Ne doit pas dépasser 20 charactères')
           .required('Champs requis'),
         email: Yup.string()

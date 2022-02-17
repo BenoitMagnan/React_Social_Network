@@ -19,6 +19,13 @@ BACKEND :
 - sequelize (handle / create the SQL database using models)
 
 To launch the app :
+- Download ans install MySQL WorkBench (https://dev.mysql.com/downloads/workbench/)
+Launch WorkBench, then : 
+- Create a user named : root
+- Create a password : groupomania
+- Create a database named : groupomania
+
+In Visual Studio Code (or another) :
 - Open a terminal in the repository :
     ### `cd docs/backend/`
     ### `nodemon server.js`

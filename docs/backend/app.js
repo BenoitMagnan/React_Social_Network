@@ -9,15 +9,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); //Autorise l'accès à l'API pour n'importe quelle origine
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
-  ); //Définit les Headers utilisé par l'API
+  );
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-  ); //Définit les méthodes possible à utiliser
+  );
   next();
 });
 
